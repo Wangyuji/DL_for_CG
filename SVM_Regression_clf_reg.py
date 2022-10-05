@@ -16,7 +16,7 @@ import os
 
 def _init_SVC_Reg():
     
-    kfd = KFold(n_splits = 20, shuffle=True, random_state = 10)
+    kfd = KFold(n_splits = 10, shuffle=True, random_state = 10)
     param_setting ={
         'C': [0.01,0.1,1,2,5]
     }
@@ -63,28 +63,50 @@ def SVC_Classifier(x_train,y_train, x_test, y_test):
 
 from sklearn.metrics import mean_squared_error
 def Linear_Regressor(x_train,y_train, x_test, y_test):
-    
-    reg = _init_SVC_Reg()
-    reg.fit(x_train,y_train)
+    from sklearn.metrics import mean_squared_error
+def R2(y_data, y_model):
+    return 1 - np.sum((y_data - y_model) ** 2) / np.sum((y_data - np.mean(y_data)) ** 2)
+def MSE(y_data,y_model):
+    n = np.size(y_model)
+    return np.sum((y_data-y_model)**2)/n
 
-    best_score = reg.best_score_
-    best_params = reg.best_params_
-    best_esti = reg.best_estimator_
-    
-    y_pred = reg.predict(x_test)
-    #y_pred = np.where(y_pred > 0.5,1, 0)
-    
-    test_acc = accuracy_score(y_test, y_pred)
-    print('Test accuracy:', test_acc)
-    
-    mse = mean_squared_error(y_test,y_pred,squared=False)
-    print('mean squared error: ',mse)
-    print('the best score: ')
-    print(best_score)
-    
-    print('the best parameter is: ')
-    print(best_params)
+def Linear_Regressor(x_train,y_train, x_test, y_test):
+    print("Linear Regression")
+    #print(np.shape(y_test)[0])
+    #print(np.shape(y_test)[1])
+    Y_tilde = np.empty((np.shape(y_train)[0], np.shape(y_train)[1]))
+    Y_pred = np.empty((np.shape(y_test)[0], np.shape(y_test)[1]))
 
+    bias = 1
+    for i in range(np.shape(y_test)[1]):
+        #y = y_train[:, i]
+        #W = np.linalg.inv(x_train.T @ x_train) @ x_train.T @ y
+        beta = np.linalg.inv(x_train.T.dot(x_train)).dot(x_train.T).dot(y_train[:, i])
+        #W = [weight + bias for weight in W]
+        y_pred = x_test @ beta
+        y_tilde = x_train @ beta
+        Y_pred[:, i] = y_pred
+        Y_tilde[:, i] = y_tilde
+
+    Y_pred = (Y_pred == Y_pred.max(axis=1)[:, None]).astype(int)
+    Y_tilde = (Y_tilde == Y_tilde.max(axis=1)[:, None]).astype(int)
+    
+    print("Train R2")
+    print(R2(y_train,Y_tilde))
+    print("The train MSE is: ")
+    print(MSE(y_train,Y_tilde))
+    
+    print("Test R2")
+    print(R2(y_test, Y_pred))
+    print("The test MSE is: ")
+    print(MSE(y_test,Y_pred))
+
+    total_acc = np.empty(9)
+    for i in range(9):
+         total_acc[i] = accuracy_score(y_test[:, i], Y_pred[:, i], normalize=False)
+
+    acc = np.sum(total_acc) / (np.shape(y_test)[0] * 9)
+    print("Accuracy LR: {0}".format(acc))
 
 
 def exe_svm_clf(x_train, y_train, x_test, y_test):
