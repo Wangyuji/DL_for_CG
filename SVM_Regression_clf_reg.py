@@ -14,45 +14,6 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 import os
 
 
-file_path = '/Users/juyeonpark/Desktop/titactoedatasets/tictactoedatasets/tictac_final.txt'
-print('File exists:', os.path.exists(file_path))
-
-np.arr = np.loadtxt(file_path)
-
-X = np.arr[:, :9 ]
-Y = np.arr[:, 9:]
-
-print(X.shape)
-print(Y.shape)
-
-
-
-file_path2 = '/Users/juyeonpark/Desktop/titactoedatasets/tictactoedatasets/tictac_single.txt'
-print('File exists:', os.path.exists(file_path2))
-
-np.arr2 = np.loadtxt(file_path2)
-
-X2 = np.arr2[:, : 9 ]
-Y2 = np.arr2[:, 9:]
-
-print(X2.shape)
-print(Y2.shape)
-
-
-x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size = 0.7)
-print ("from tictac_final.txt:")
-print (x_train.shape, y_train.shape)
-print (x_test.shape, y_test.shape)
-
-
-x2_train, x2_test, y2_train, y2_test = train_test_split(X2, Y2, test_size = 0.7)
-print ("from tictac_single.txt:")
-print (x2_train.shape, y2_train.shape)
-print (x2_test.shape, y2_test.shape)
-
-
-
-
 def _init_SVC_Reg():
     
     kfd = KFold(n_splits = 20, shuffle=True, random_state = 10)
