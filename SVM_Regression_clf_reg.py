@@ -1,8 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[13]:
-
 
 import numpy as np
 from sklearn.model_selection import train_test_split
@@ -19,9 +14,6 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 import os
 
 
-# In[14]:
-
-
 file_path = '/Users/juyeonpark/Desktop/titactoedatasets/tictactoedatasets/tictac_final.txt'
 print('File exists:', os.path.exists(file_path))
 
@@ -33,8 +25,6 @@ Y = np.arr[:, 9:]
 print(X.shape)
 print(Y.shape)
 
-
-# In[15]:
 
 
 file_path2 = '/Users/juyeonpark/Desktop/titactoedatasets/tictactoedatasets/tictac_single.txt'
@@ -49,16 +39,10 @@ print(X2.shape)
 print(Y2.shape)
 
 
-# In[16]:
-
-
 x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size = 0.7)
 print ("from tictac_final.txt:")
 print (x_train.shape, y_train.shape)
 print (x_test.shape, y_test.shape)
-
-
-# In[17]:
 
 
 x2_train, x2_test, y2_train, y2_test = train_test_split(X2, Y2, test_size = 0.7)
@@ -66,8 +50,6 @@ print ("from tictac_single.txt:")
 print (x2_train.shape, y2_train.shape)
 print (x2_test.shape, y2_test.shape)
 
-
-# In[18]:
 
 
 
@@ -87,8 +69,6 @@ def _init_SVC_Reg():
     
     return clf
 
-
-# In[19]:
 
 
 
@@ -118,16 +98,11 @@ def SVC_Classifier(x_train,y_train, x_test, y_test):
     plt.show()
 
 
-# In[20]:
-
-
 print('final dataset: ')
 SVC_Classifier(x_train,y_train, x_test, y_test)
 print('single dataset: ')
 SVC_Classifier(x2_train,y2_train, x2_test, y2_test)
 
-
-# In[10]:
 
 
 from sklearn.metrics import mean_squared_error
@@ -155,16 +130,12 @@ def Linear_Regressor(x_train,y_train, x_test, y_test):
     print(best_params)
 
 
-# In[11]:
-
 
 print('final')
 Linear_Regressor(x_train,y_train, x_test, y_test)
 print('single')
 Linear_Regressor(x2_train,y2_train, x2_test, y2_test)
 
-
-# In[ ]:
 
 
 
