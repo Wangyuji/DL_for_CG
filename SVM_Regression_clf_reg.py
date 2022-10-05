@@ -88,10 +88,10 @@ def Linear_Regressor(x_train,y_train, x_test, y_test):
 
 
 def exe_svm_clf(x_train, y_train, x_test, y_test):
-    MLP_classifier(x_train, y_train, x_test, y_test)
+    SVC_classifier(x_train, y_train, x_test, y_test)
 
 def exe_linReg_reg(x_train, y_train, x_test, y_test):
-    MLP_regressor(x_train, y_train, x_test, y_test)
+    Linear_Regressor(x_train, y_train, x_test, y_test)
 
 
 
