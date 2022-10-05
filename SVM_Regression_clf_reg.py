@@ -59,11 +59,6 @@ def SVC_Classifier(x_train,y_train, x_test, y_test):
     plt.show()
 
 
-print('final dataset: ')
-SVC_Classifier(x_train,y_train, x_test, y_test)
-print('single dataset: ')
-SVC_Classifier(x2_train,y2_train, x2_test, y2_test)
-
 
 
 from sklearn.metrics import mean_squared_error
@@ -92,10 +87,11 @@ def Linear_Regressor(x_train,y_train, x_test, y_test):
 
 
 
-print('final')
-Linear_Regressor(x_train,y_train, x_test, y_test)
-print('single')
-Linear_Regressor(x2_train,y2_train, x2_test, y2_test)
+def exe_svm_clf(x_train, y_train, x_test, y_test):
+    MLP_classifier(x_train, y_train, x_test, y_test)
+
+def exe_linReg_reg(x_train, y_train, x_test, y_test):
+    MLP_regressor(x_train, y_train, x_test, y_test)
 
 
 
